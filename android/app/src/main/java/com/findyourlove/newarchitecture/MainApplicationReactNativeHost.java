@@ -1,4 +1,4 @@
-package com.findyourlove.newarchitecture;
+package com.billreminder.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.findyourlove.BuildConfig;
-import com.findyourlove.newarchitecture.components.MainComponentsRegistry;
-import com.findyourlove.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.billreminder.BuildConfig;
+import com.billreminder.newarchitecture.components.MainComponentsRegistry;
+import com.billreminder.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

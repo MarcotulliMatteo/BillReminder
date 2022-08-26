@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "999758626793",
+    "project_id": "billreminder-5c9ae",
+    "storage_bucket": "billreminder-5c9ae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:999758626793:android:590238c88f4ce034465578",
+        "android_client_info": {
+          "package_name": "com.billreminder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "999758626793-m4b23kia2285hn5c5b37qq5m94uiegeg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.billreminder",
+            "certificate_hash": "50b4dc27902ce1f9257dda190d9e451e5fdbab7c"
+          }
+        },
+        {
+          "client_id": "999758626793-cj2p631vdvv3r46a5nb3q4cj4shkn94s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQkcTyvJuMFC45pKwz3DQZSStDqAQBDBU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "999758626793-cj2p631vdvv3r46a5nb3q4cj4shkn94s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

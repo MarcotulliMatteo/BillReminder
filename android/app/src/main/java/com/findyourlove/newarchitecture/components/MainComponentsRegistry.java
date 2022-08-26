@@ -1,4 +1,4 @@
-package com.findyourlove.newarchitecture.components;
+package com.billreminder.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;
