@@ -1,13 +1,21 @@
 import React from 'react';
 
-import { NavigationContainer } from '@react-navigation/native'
-import TabNavigator from './navigation/TabNavigator';
+import AppStack from './navigation/AppStack';
+
+import Store from './providers/reduxProvider';
+import { Provider, useDispatch, useSelector } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 function App() {
+  const {reduxStore, persister} = Store()
+
   return (
-    <NavigationContainer>
-      <TabNavigator/>
-    </NavigationContainer>
+    <PersistGate loading={null} persistor={persister}>
+      <Provider store={reduxStore}>
+        <AppStack/>
+      </Provider>
+    </PersistGate>
+    
   );
 }
 

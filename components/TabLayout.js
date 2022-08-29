@@ -15,11 +15,11 @@ const TabLayout = props => {
     ]);
 
     const FirstRoute = () => (
-        <PaidBills/>
+        <PaidBills category={props.category}/>
     );
       
     const SecondRoute = () => (
-        <UnpaidBills/>
+        <UnpaidBills category={props.category}/>
     );
 
     const renderScene = SceneMap({

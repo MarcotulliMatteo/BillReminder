@@ -26,6 +26,13 @@ export default class BillsRecap extends React.Component {
         'Abbonamenti'
     ]
 
+    categoryIcons = {
+        Tutti: 'book-outline',
+        Casa: 'home-outline',
+        Veicoli: 'md-car-sport-outline',
+        Abbonamenti: 'tv-outline'
+    }
+
     _onPressCategory = (category) => {
         this.setState({selected: category})
     }
@@ -48,7 +55,8 @@ export default class BillsRecap extends React.Component {
                                             <BillCardsCategory textCategory={cat} 
                                             isSelected={cat == this.state.selected ? true : false} 
                                             key={cat} 
-                                            onPress={this._onPressCategory}/>
+                                            onPress={this._onPressCategory}
+                                            icon={this.categoryIcons[cat]}/>
                                         )
                                     })
                                 }
@@ -56,7 +64,7 @@ export default class BillsRecap extends React.Component {
                         </View>
 
                         <View style={{borderTopColor: colors.mediumBackground , borderTopWidth: 1, width:'100%', height:'100%'}}>
-                            <TabLayout/>
+                            <TabLayout category={this.state.selected}/>
                         </View>
                     </View>
                     
