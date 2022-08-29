@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { Dimensions, View, Text } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Dimensions } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 
 import colors from "../utils/colors.json";
@@ -10,21 +10,25 @@ const TabLayout = props => {
 
     const [index, setIndex] = useState(0);
     const [routes] = useState([
-        { key: 'first', title: 'Pagate' },
-        { key: 'second', title: 'Da Pagare' },
+        { key: 'upaid', title: 'Da Pagare' },
+        { key: 'paid', title: 'Pagate' },
     ]);
 
+    useEffect(() => {
+        props.refreshData(routes[index])
+    }, [index])
+
     const FirstRoute = () => (
-        <PaidBills category={props.category}/>
+        <UnpaidBills category={props.category} bills={props.bills}/>
     );
       
     const SecondRoute = () => (
-        <UnpaidBills category={props.category}/>
+        <PaidBills category={props.category} bills={props.bills}/>
     );
 
     const renderScene = SceneMap({
-        first: FirstRoute,
-        second: SecondRoute,
+        paid: FirstRoute,
+        upaid: SecondRoute,
     });
 
     const initialLayout = { width: Dimensions.get('window').width};

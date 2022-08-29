@@ -3,7 +3,7 @@ import React from 'react';
 import AppStack from './navigation/AppStack';
 
 import Store from './providers/reduxProvider';
-import { Provider, useDispatch, useSelector } from 'react-redux';
+import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
 function App() {

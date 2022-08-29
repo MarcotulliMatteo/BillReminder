@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, ScrollView, StatusBar, TouchableOpacity} from "react-native";
+import React from "react";
+import { Text, View, TouchableOpacity} from "react-native";
 import LinearGradient from 'react-native-linear-gradient';
-
-import colors from "../utils/colors.json";
 
 const PaidBillCards = props => {
     return (

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { StyleSheet, Text, View, ScrollView, StatusBar} from "react-native";
 import SafeAreaView from 'react-native-safe-area-view';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import LinearGradient from 'react-native-linear-gradient';
+import firebase from '@react-native-firebase/app';
 
 import colors from "../utils/colors.json";
 
@@ -13,10 +14,13 @@ import BillCardsCategory  from "../components/BillCardsCategory";
 export default class BillsRecap extends React.Component {
     constructor(props) {
         super(props);
+        this.ref = firebase.firestore();
     };
 
     state = {
-        selected: 'Tutti'
+        selected: 'Tutti',
+        bills: [],
+        paid: false
     }
 
     category = [
@@ -33,8 +37,50 @@ export default class BillsRecap extends React.Component {
         Abbonamenti: 'tv-outline'
     }
 
+    componentDidMount = () => {
+    }
+
     _onPressCategory = (category) => {
         this.setState({selected: category})
+        this._fetchPaidBills(this.state.paid, category)
+    }
+
+    _fetchPaidBills = (paid, category) => {
+        const userID = firebase.auth().currentUser.uid
+
+        if(category == 'Tutti') {
+            this.ref
+            .collection('Bills')
+            .where('userID', '==', userID)
+            .where('paid', '==', paid)
+            .get()
+            .then(querySnapshot => {
+                const data = querySnapshot._docs
+                this.setState({"bills": data})
+            })
+            .catch(err => {
+                console.error(err)
+            });
+        } else {
+            this.ref
+            .collection('Bills')
+            .where('userID', '==', userID)
+            .where('paid', '==', paid)
+            .where('category', '==', category)
+            .get()
+            .then(querySnapshot => {
+                const data = querySnapshot._docs
+                this.setState({"bills": data})
+            })
+            .catch(err => {
+                console.error(err)
+            });
+        }
+    }
+
+    _changeDataPaidUnpaid = (root) => {
+        this.state.paid = root.key == 'paid' ? true : false
+        this._fetchPaidBills(this.state.paid, this.state.selected)
     }
 
     render() {
@@ -64,7 +110,7 @@ export default class BillsRecap extends React.Component {
                         </View>
 
                         <View style={{borderTopColor: colors.mediumBackground , borderTopWidth: 1, width:'100%', height:'100%'}}>
-                            <TabLayout category={this.state.selected}/>
+                            <TabLayout category={this.state.selected} bills={this.state.bills} refreshData={this._changeDataPaidUnpaid}/>
                         </View>
                     </View>
                     
