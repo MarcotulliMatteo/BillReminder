@@ -13,7 +13,7 @@ const PaidBillCards = props => {
                     <View style={{flexDirection:'row', padding:5, justifyContent:'space-between', alignItems:'center'}}>
                         <View style={{paddingLeft: 20}}>
                             <Text style={{paddingBottom: 10, fontSize: 18, color:'white'}}>{props.companyName}</Text>
-                            <Text style={{fontSize: 18, color:'#01C8CB'}}>{props.billPrice}</Text>
+                            <Text style={{fontSize: 18, color: colors.lightBlue}}>{props.billPrice}</Text>
                         </View>
                         <View style={{paddingRight: 20}}>
                             <Text style={{fontSize: 18, color:'white'}}>Segna come pagata</Text>

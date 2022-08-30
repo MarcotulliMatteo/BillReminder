@@ -21,7 +21,8 @@ export default class BillsRecap extends React.Component {
     state = {
         selected: 'Tutti',
         bills: [],
-        paid: false
+        paid: false,
+        showBusy: false
     }
 
     category = [
@@ -47,6 +48,7 @@ export default class BillsRecap extends React.Component {
     }
 
     _fetchPaidBills = (paid, category) => {
+        this.setState({"showBusy": true})
         const userID = firebase.auth().currentUser.uid
 
         if(category == 'Tutti') {
@@ -57,9 +59,10 @@ export default class BillsRecap extends React.Component {
             .get()
             .then(querySnapshot => {
                 const data = querySnapshot._docs
-                this.setState({"bills": data})
+                this.setState({"bills": data, "showBusy": false})
             })
             .catch(err => {
+                this.setState({"showBusy": false})
                 console.error(err)
             });
         } else {
@@ -71,9 +74,10 @@ export default class BillsRecap extends React.Component {
             .get()
             .then(querySnapshot => {
                 const data = querySnapshot._docs
-                this.setState({"bills": data})
+                this.setState({"bills": data, "showBusy": false})
             })
             .catch(err => {
+                this.setState({"showBusy": false})
                 console.error(err)
             });
         }
@@ -111,7 +115,7 @@ export default class BillsRecap extends React.Component {
                         </View>
 
                         <View style={{borderTopColor: colors.mediumBackground , borderTopWidth: 1, width:'100%', height:'100%'}}>
-                            <TabLayout category={this.state.selected} bills={this.state.bills} refreshData={this._changeDataPaidUnpaid}/>
+                            <TabLayout category={this.state.selected} bills={this.state.bills} refreshData={this._changeDataPaidUnpaid} showBusy={this.state.showBusy}/>
                         </View>
                     </View>
                     

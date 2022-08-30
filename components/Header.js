@@ -18,7 +18,7 @@ const Header = props => {
                 }
                 
                 <View style={{flex:4, alignItems:'center'}}>
-                    <Text style={{color:'white'}}>{props.pageName}</Text>
+                    <Text style={{color:'white', fontSize:17}}>{props.pageName}</Text>
                 </View>
                 {
                     props.hideRightIcon ? null :

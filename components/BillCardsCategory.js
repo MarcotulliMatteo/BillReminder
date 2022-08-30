@@ -10,7 +10,7 @@ const BillCardsCategory = props => {
         <View>
             <View style={{paddingLeft: 5}}>
                 <TouchableOpacity style={{margin: 10,
-                 height: props.isSelected ? 170 : 150, width: props.isSelected ? 270 : 250, justifyContent:'center', alignItems: 'center'}}
+                 height: props.isSelected ? 150 : 130, width: props.isSelected ? 230 : 200, justifyContent:'center', alignItems: 'center'}}
                  onPress={props.onPress.bind(this, props.textCategory)}>
                     <LinearGradient colors={[colors.darkButton, colors.lightButton]} 
                         start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} 

@@ -5,5 +5,6 @@
     "darkButton": "#FD8CB2",
     "lightButton": "#F7C2AC",
     "lightCard": "#B76FB3",
-    "darkCard": "#A34AAA"
+    "darkCard": "#A34AAA",
+    "lightBlue": "#01C8CB"
 }

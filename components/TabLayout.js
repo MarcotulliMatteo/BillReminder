@@ -19,11 +19,11 @@ const TabLayout = props => {
     }, [index])
 
     const FirstRoute = () => (
-        <UnpaidBills category={props.category} bills={props.bills}/>
+        <UnpaidBills category={props.category} bills={props.bills} showBusy={props.showBusy}/>
     );
       
     const SecondRoute = () => (
-        <PaidBills category={props.category} bills={props.bills}/>
+        <PaidBills category={props.category} bills={props.bills} showBusy={props.showBusy}/>
     );
 
     const renderScene = SceneMap({

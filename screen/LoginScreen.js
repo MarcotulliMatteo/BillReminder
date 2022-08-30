@@ -17,7 +17,6 @@ const LoginScreen = () => {
 
     const dispatch = useDispatch()
 
-    //use effect run when component mount
     useEffect(() => {
         const unsubscribe = auth().onAuthStateChanged(user => {
             if(user) {

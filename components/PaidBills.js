@@ -1,7 +1,9 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, Dimensions, ScrollView} from 'react-native';
+import React from 'react';
+import {ScrollView, ActivityIndicator} from 'react-native';
 
 import PaidBillCards from './PaidBillCard';
+
+import colors from '../utils/colors.json';
 
 const PaidBills = props => {
     return (
@@ -14,6 +16,7 @@ const PaidBills = props => {
                     )
                 })
             }
+            {props.showBusy ? <ActivityIndicator size={50} color={colors.lightBlue} style={{padding:15}}/> : null}
         </ScrollView>
     )
 }
