@@ -4,5 +4,6 @@
     "lightBackground": "#9B4CB8",
     "darkButton": "#FD8CB2",
     "lightButton": "#F7C2AC",
-    "backgroundGradient": ["#4F0F84", "#9B4CB8"]
+    "lightCard": "#B76FB3",
+    "darkCard": "#A34AAA"
 }

@@ -1,6 +1,10 @@
-import React, {useEffect, useState} from "react";
-import { StyleSheet, Text, View, ScrollView, StatusBar, KeyboardAvoidingView, TextInput, TouchableOpacity} from "react-native";
+import React, { useEffect, useState } from "react";
+import { Text, View, StatusBar, KeyboardAvoidingView, TextInput, TouchableOpacity, SafeAreaView, StyleSheet } from "react-native";
 import auth from '@react-native-firebase/auth';
+import LinearGradient from 'react-native-linear-gradient';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
+
+import Ionicon from 'react-native-vector-icons/Ionicons';
 
 import colors from '../utils/colors.json'
 
@@ -72,29 +76,85 @@ const LoginScreen = () => {
 
     return (
         <KeyboardAvoidingView style={{flex:1}}>
-            <View style={{justifyContent:'center', alignItems:'center', flex:1}}>
-                <TextInput placeholder="Email" style={{width:'80%', backgroundColor:'grey', borderRadius: 10, margin: 10}}
-                    value={email}
-                    onChangeText={ text => {setEmail(text)} }/>
-                <TextInput placeholder="Password" style={{width:'80%', backgroundColor:'grey', borderRadius: 10, margin: 10}} secureTextEntry
-                    value={password}
-                    onChangeText={ text => {setPassword(text)} }/>
+            <SafeAreaView style={{flex:1}}>
+                <StatusBar backgroundColor={colors.darkBackground} barStyle="light-content" style={styles.statusBarStyle}/>
+                <LinearGradient colors={[colors.mediumBackground, colors.lightBackground]} 
+                    start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{width:'100%', height:'100%', alignItems:'center'}}>
+                    
+                    <View style={{width:'100%', marginBottom: 5, justifyContent:'center', alignItems:'center', padding: 30, flex:1}}>
+                        <Text style={{textAlign:'center', fontSize: 20, color:'white'}}>Crea Account</Text>
+                    </View>
 
-                <TouchableOpacity style={{margin: 10, borderRadius: 10, padding: 10, backgroundColor: colors.darkButton, width: '70%', justifyContent: 'center', alignItems: 'center'}}
-                    onPress={_singInUsernamePassword}>
-                    <Text style={{fontSize: 17}}>
-                        Accedi
-                    </Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{margin: 10, borderRadius: 10, padding: 10, backgroundColor: colors.darkButton, width: '70%', justifyContent: 'center', alignItems: 'center'}}
-                    onPress={_registerUsernamePassword}>
-                    <Text style={{fontSize: 17}}>
-                        Registrati
-                    </Text>
-                </TouchableOpacity>
-            </View>
+                    <View style={{width:'100%', alignItems:'center', flex:10}}>
+                        <View style={{width:'100%', marginBottom: 5}}>
+                            <View style={{width:'85%', justifyContent:'center', alignItems:'center'}}>
+                                <Text style={{textAlign:'left', fontSize: 15, color:'white', marginBottom: 10, width:'85%', paddingStart: 5}}>Inserisci la tua email:</Text>
+                            </View>
+                            
+                            <View style={{width:'100%', marginBottom: 20, justifyContent: 'center', alignItems: 'center'}}>
+                                <LinearGradient colors= {[colors.darkCard, colors.lightCard]}
+                                start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{width: '85%', borderRadius:5, paddingLeft: 10, paddingRight: 10}}>
+                                    <TextInput placeholder="Email" placeholderTextColor={'white'} style={{width:'100%', color: 'white', fontSize: 17}}
+                                        value={email}
+                                        onChangeText={ text => {setEmail(text)} }/>
+                                </LinearGradient>
+                            </View>
+                        </View>    
+                        
+                        <View style={{width:'100%', marginBottom: 5}}>
+                            <View style={{width:'85%', justifyContent:'center', alignItems:'center'}}>
+                                <Text style={{textAlign:'left', fontSize: 15, color:'white', marginBottom: 10, width:'85%', paddingStart: 5}}>Scegli una password:</Text>
+                            </View>
+                            
+                            <View style={{width:'100%', marginBottom: 20, justifyContent: 'center', alignItems: 'center'}}>
+                                <LinearGradient colors= {[colors.darkCard, colors.lightCard]}
+                                start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{width: '85%', borderRadius:5, paddingLeft: 10, paddingRight: 10}}>
+                                    <TextInput placeholder="Password" placeholderTextColor={'white'} style={{width:'100%', color: 'white', fontSize: 17}} secureTextEntry
+                                        value={password}
+                                        onChangeText={ text => {setPassword(text)} }/>
+                                </LinearGradient>
+                            </View>
+                        </View>
+
+                        {/*
+                            <View style={{width: '85%', justifyContent:'center', alignItems:'center', margin: 20, flexDirection: 'row'}}>
+                                <Ionicon name="logo-google" size={45} style={{marginRight: 50}} color={colors.lightButton}/>
+                                <Ionicon name="logo-facebook" size={45} color={colors.lightButton}/>
+                            </View>
+                        */}
+                        
+                        <TouchableOpacity style={{margin: 15, width: '75%', borderRadius: 5}}
+                            onPress={_singInUsernamePassword}>
+                            <LinearGradient colors={[colors.darkButton, colors.lightButton]} 
+                            start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} 
+                            style={{width:'100%', justifyContent:'center', alignItems:'center', borderRadius: 10, padding: 15}}>
+                                <Text style={{fontSize: 17}}>
+                                    Accedi
+                                </Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{margin: 15, width: '75%', borderRadius: 5}}
+                            onPress={_registerUsernamePassword}>
+                            <LinearGradient colors={[colors.darkButton, colors.lightButton]} 
+                            start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} 
+                            style={{width:'100%', justifyContent:'center', alignItems:'center', borderRadius: 10, padding: 15}}>
+                                <Text style={{fontSize: 17}}>
+                                    Registrati
+                                </Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
+                    </View>
+
+                </LinearGradient>
+            </SafeAreaView>
         </KeyboardAvoidingView>
     )
 }
+
+const styles = StyleSheet.create({
+    statusBarStyle: {
+        height: getStatusBarHeight()
+    }
+});
 
 export default LoginScreen;

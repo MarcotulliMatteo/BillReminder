@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView, StatusBar} from "react-native";
+import { StyleSheet, View, ScrollView, StatusBar} from "react-native";
 import SafeAreaView from 'react-native-safe-area-view';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import LinearGradient from 'react-native-linear-gradient';

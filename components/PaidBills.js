@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, Dimensions, ScrollView} from 'react-native';
 
-
 import PaidBillCards from './PaidBillCard';
 
 const PaidBills = props => {
