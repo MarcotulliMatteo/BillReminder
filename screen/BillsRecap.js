@@ -4,6 +4,7 @@ import SafeAreaView from 'react-native-safe-area-view';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import LinearGradient from 'react-native-linear-gradient';
 import firebase from '@react-native-firebase/app';
+import firestore from '@react-native-firebase/firestore';
 
 import colors from "../utils/colors.json";
 
@@ -14,7 +15,7 @@ import BillCardsCategory  from "../components/BillCardsCategory";
 export default class BillsRecap extends React.Component {
     constructor(props) {
         super(props);
-        this.ref = firebase.firestore();
+        this.ref = firestore();
     };
 
     state = {
