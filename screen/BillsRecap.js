@@ -7,6 +7,7 @@ import firebase from '@react-native-firebase/app';
 import firestore from '@react-native-firebase/firestore';
 
 import colors from "../utils/colors.json";
+import mockData from "../utils/mockData.json";
 
 import TabLayout from '../components/TabLayout';
 import Header  from "../components/Header";
@@ -25,14 +26,6 @@ export default class BillsRecap extends React.Component {
         paid: false,
         showBusy: false
     }
-
-    category = [
-        'Tutti',
-        'Casa',
-        'Veicoli',
-        'Abbonamenti',
-        'Altro'
-    ]
 
     categoryIcons = {
         Tutti: 'book-outline',
@@ -91,8 +84,8 @@ export default class BillsRecap extends React.Component {
         this._fetchPaidBills(this.state.paid, this.state.selected)
     }
 
-    _onPressBillsCard = (bill) => {
-        this.props.navigation.navigate('BillDetails', {bill: bill})
+    _onPressBillsCard = (bill, billID) => {
+        this.props.navigation.navigate('BillDetails', {bill: bill, billID: billID})
     }
 
     render() {
@@ -108,7 +101,7 @@ export default class BillsRecap extends React.Component {
                             <ScrollView horizontal={true}
                             contentContainerStyle={{alignItems:'center'}} showsHorizontalScrollIndicator={false}>
                                 {
-                                    this.category.map(cat => {
+                                    mockData.category.map(cat => {
                                         return (
                                             <BillCardsCategory textCategory={cat} 
                                             isSelected={cat == this.state.selected ? true : false} 

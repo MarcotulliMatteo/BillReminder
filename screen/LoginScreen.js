@@ -127,7 +127,7 @@ const LoginScreen = () => {
                             <LinearGradient colors={[colors.darkButton, colors.lightButton]} 
                             start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} 
                             style={{width:'100%', justifyContent:'center', alignItems:'center', borderRadius: 10, padding: 15}}>
-                                <Text style={{fontSize: 17}}>
+                                <Text style={{fontSize: 17, color:'white'}}>
                                     Accedi
                                 </Text>
                             </LinearGradient>
@@ -137,7 +137,7 @@ const LoginScreen = () => {
                             <LinearGradient colors={[colors.darkButton, colors.lightButton]} 
                             start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} 
                             style={{width:'100%', justifyContent:'center', alignItems:'center', borderRadius: 10, padding: 15}}>
-                                <Text style={{fontSize: 17}}>
+                                <Text style={{fontSize: 17, color:'white'}}>
                                     Registrati
                                 </Text>
                             </LinearGradient>

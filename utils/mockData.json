@@ -1,0 +1,20 @@
+{
+    "category": [
+        "Tutti",
+        "Casa",
+        "Veicoli",
+        "Abbonamenti",
+        "Altro"
+    ],
+    "categoryForSelector": [
+        "Casa",
+        "Veicoli",
+        "Abbonamenti",
+        "Altro"
+    ],
+    "repeatEvery": [
+        "Mai",
+        "Settimana",
+        "Mese"
+    ]
+}

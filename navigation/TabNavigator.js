@@ -8,6 +8,7 @@ import colors from "../utils/colors.json";
 import HomeScreen from '../screen/Home';
 import InsertBillsScreen from '../screen/InsertBills';
 import BillsRecapStack from './BillsRecapStack';
+import BillsRecap from '../screen/BillsRecap';
 
 const Tab = createBottomTabNavigator();
 

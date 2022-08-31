@@ -19,7 +19,7 @@ const TabBills = props => {
                 const currentDate = new Date().setHours(0,0,0,0);
                 const expDateString = bill.expirationDate.toDate() >= currentDate ? 'Scade ' + expDate : 'Scaduta ' + expDate;
                 return (
-                    <BillCards key={index} companyName={bill.companyName} billPrice={bill.totalAmount + ' €'} expirationDate={expDateString} onPress={props.onPress} bill={bill}/>
+                    <BillCards key={index} companyName={bill.companyName} billPrice={bill.totalAmount + ' €'} expirationDate={expDateString} onPress={props.onPress} bill={bill} billID={elem.id}/>
                 )
             })
         }

@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import BillDetailsScreen from "../screen/BillDetails";
 import BillsRecapScreen from "../screen/BillsRecap";
+import TabNavigator from "./TabNavigator";
 
 import colors from "../utils/colors.json";
 
