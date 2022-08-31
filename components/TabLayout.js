@@ -3,14 +3,13 @@ import { Dimensions } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 
 import colors from "../utils/colors.json";
-import PaidBills from './PaidBills';
-import UnpaidBills from './UnpaidBills';
+import TabBills from './TabBills';
 
 const TabLayout = props => {
 
     const [index, setIndex] = useState(0);
     const [routes] = useState([
-        { key: 'upaid', title: 'Da Pagare' },
+        { key: 'unpaid', title: 'Da Pagare' },
         { key: 'paid', title: 'Pagate' },
     ]);
 
@@ -18,17 +17,17 @@ const TabLayout = props => {
         props.refreshData(routes[index])
     }, [index])
 
-    const FirstRoute = () => (
-        <UnpaidBills category={props.category} bills={props.bills} showBusy={props.showBusy}/>
+    const FirstRouteUnpaid = () => (
+        <TabBills category={props.category} bills={props.bills} showBusy={props.showBusy} paid={false} onPress={props.onPress}/>
     );
       
-    const SecondRoute = () => (
-        <PaidBills category={props.category} bills={props.bills} showBusy={props.showBusy}/>
+    const SecondRoutePaid = () => (
+        <TabBills category={props.category} bills={props.bills} showBusy={props.showBusy} paid={true} onPress={props.onPress}/>
     );
 
     const renderScene = SceneMap({
-        paid: FirstRoute,
-        upaid: SecondRoute,
+        unpaid: FirstRouteUnpaid,
+        paid: SecondRoutePaid,
     });
 
     const initialLayout = { width: Dimensions.get('window').width};

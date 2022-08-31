@@ -11,6 +11,7 @@ import colors from "../utils/colors.json";
 import TabLayout from '../components/TabLayout';
 import Header  from "../components/Header";
 import BillCardsCategory  from "../components/BillCardsCategory";
+import BillDetails from "../screen/BillDetails";
 
 export default class BillsRecap extends React.Component {
     constructor(props) {
@@ -29,14 +30,16 @@ export default class BillsRecap extends React.Component {
         'Tutti',
         'Casa',
         'Veicoli',
-        'Abbonamenti'
+        'Abbonamenti',
+        'Altro'
     ]
 
     categoryIcons = {
         Tutti: 'book-outline',
         Casa: 'home-outline',
         Veicoli: 'md-car-sport-outline',
-        Abbonamenti: 'tv-outline'
+        Abbonamenti: 'tv-outline',
+        Altro: 'book-outline'
     }
 
     componentDidMount = () => {
@@ -88,6 +91,10 @@ export default class BillsRecap extends React.Component {
         this._fetchPaidBills(this.state.paid, this.state.selected)
     }
 
+    _onPressBillsCard = (bill) => {
+        this.props.navigation.navigate('BillDetails', {bill: bill})
+    }
+
     render() {
         return (
             <SafeAreaView style={{flex:1, backgroundColor: colors.darkBackground, justifyContent:'center', alignItems:'center'}}>
@@ -115,7 +122,7 @@ export default class BillsRecap extends React.Component {
                         </View>
 
                         <View style={{borderTopColor: colors.mediumBackground , borderTopWidth: 1, width:'100%', height:'100%'}}>
-                            <TabLayout category={this.state.selected} bills={this.state.bills} refreshData={this._changeDataPaidUnpaid} showBusy={this.state.showBusy}/>
+                            <TabLayout category={this.state.selected} bills={this.state.bills} refreshData={this._changeDataPaidUnpaid} showBusy={this.state.showBusy} onPress={this._onPressBillsCard}/>
                         </View>
                     </View>
                     

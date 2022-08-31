@@ -6,8 +6,8 @@ import EntypoIcons from "react-native-vector-icons/Entypo";
 import colors from "../utils/colors.json";
 
 import HomeScreen from '../screen/Home';
-import BillsRecapScreen from '../screen/BillsRecap';
 import InsertBillsScreen from '../screen/InsertBills';
+import BillsRecapStack from './BillsRecapStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -27,7 +27,7 @@ const TabNavigator = () => {
                     )
                 }
             }}/>
-            <Tab.Screen name='BillsRecap' component={BillsRecapScreen} options={{
+            <Tab.Screen name='BillsRecap' component={BillsRecapStack} options={{
                 tabBarIcon: ({color, size}) => {
                     return(
                         <EntypoIcons name="documents" color={color} size={size}/>
