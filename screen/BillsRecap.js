@@ -1,10 +1,11 @@
 import React from "react";
-import { StyleSheet, View, ScrollView, StatusBar} from "react-native";
+import { StyleSheet, View, ScrollView, StatusBar, TouchableOpacity} from "react-native";
 import SafeAreaView from 'react-native-safe-area-view';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 import LinearGradient from 'react-native-linear-gradient';
 import firebase from '@react-native-firebase/app';
 import firestore from '@react-native-firebase/firestore';
+import Ionicon from 'react-native-vector-icons/Ionicons';
 
 import colors from "../utils/colors.json";
 import mockData from "../utils/mockData.json";
@@ -12,7 +13,7 @@ import mockData from "../utils/mockData.json";
 import TabLayout from '../components/TabLayout';
 import Header  from "../components/Header";
 import BillCardsCategory  from "../components/BillCardsCategory";
-import BillDetails from "../screen/BillDetails";
+
 
 export default class BillsRecap extends React.Component {
     constructor(props) {
@@ -84,8 +85,23 @@ export default class BillsRecap extends React.Component {
         this._fetchPaidBills(this.state.paid, this.state.selected)
     }
 
-    _onPressBillsCard = (bill, billID) => {
-        this.props.navigation.navigate('BillDetails', {bill: bill, billID: billID})
+    _onPressBillsCard = (bill, billID, isNewBill) => {
+
+        if(isNewBill) {
+            const newBill = {
+                category: 'Casa',
+                companyName: '',
+                expirationDate: firestore.Timestamp.fromDate(new Date()),
+                note: '',
+                paid: false,
+                recurrence: 'Mai',
+                totalAmount: '',
+                userID: firebase.auth().currentUser.uid
+            }
+            bill = newBill
+        }
+
+        this.props.navigation.navigate('BillDetails', {bill: bill, billID: billID, isNewBill: isNewBill})
     }
 
     render() {
@@ -118,7 +134,17 @@ export default class BillsRecap extends React.Component {
                             <TabLayout category={this.state.selected} bills={this.state.bills} refreshData={this._changeDataPaidUnpaid} showBusy={this.state.showBusy} onPress={this._onPressBillsCard}/>
                         </View>
                     </View>
-                    
+
+                    <View style={{position:'absolute', bottom: 30, right: 30}}>
+                        <TouchableOpacity style={{borderRadius: 100/2}} onPress={() => this._onPressBillsCard({}, null, true)}>
+                            <LinearGradient colors={[colors.darkButton, colors.lightButton]} 
+                             start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} 
+                             style={{width:'100%', justifyContent:'center', alignItems:'center', padding: 15, borderRadius: 100/2}}>
+                                <Ionicon name='add-outline' size={25} color={'white'}/>
+                            </LinearGradient>
+                        </TouchableOpacity>
+                    </View>
+
                 </LinearGradient>
             </SafeAreaView>
         )

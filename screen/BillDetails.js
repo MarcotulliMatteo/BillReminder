@@ -7,6 +7,7 @@ import DatePicker from 'react-native-date-picker';
 import { Picker } from '@react-native-picker/picker';
 
 import Header  from "../components/Header";
+import BillDetailsButtons from "../components/BillDetailsButtons";
 
 import firestore from '@react-native-firebase/firestore';
 
@@ -21,7 +22,13 @@ export default class BillDetails extends React.Component {
     state = {
         bill: null,
         open: false,
-        billID: null
+        billID: null,
+        canModify: false,
+        isNewBill: false
+    }
+
+    componentDidMount = () => {
+        this.setState({'canModify': this.state.isNewBill})
     }
 
     _navBack = () => {
@@ -72,9 +79,49 @@ export default class BillDetails extends React.Component {
         .update(this.state.bill)
         .then(() => {
             ToastAndroid.show("Modulo Aggiornato", ToastAndroid.LONG);
-            console.log('User updated!');
+            console.log('Bill updated!');
         }).catch(err => {
             console.error('Uppload information error on Firebase')
+        });
+    }
+
+    _setPaidBill = () => {
+        firestore()
+        .collection('Bills')
+        .doc(this.state.billID)
+        .update({
+            paid: true
+        })
+        .then(() => {
+            ToastAndroid.show("Modulo Pagato", ToastAndroid.LONG);
+            console.log('Bill Paid!');
+        }).catch(err => {
+            console.error('Uppload information error on Firebase')
+        });
+    }
+
+    _deleteBill = () => {
+        firestore()
+        .collection('Bills')
+        .doc(this.state.billID)
+        .delete()
+        .then(() => {
+            ToastAndroid.show("Modulo Cancellato", ToastAndroid.LONG);
+            console.log('Bill deleted!');
+        }).catch(err => {
+            console.error('Delete information error on Firebase')
+        });
+    }
+
+    _insertFirebase = (bill) => {
+        firestore()
+        .collection('Bills')
+        .add(bill)
+        .then(() => {
+            ToastAndroid.show("Modulo Creato", ToastAndroid.LONG);
+            console.log('Bill added!');
+        }).catch(err => {
+            console.error('Insert information error on Firebase')
         });
     }
 
@@ -84,21 +131,26 @@ export default class BillDetails extends React.Component {
 
         return (
             <View>
-                <TouchableOpacity onPress={() => {this.setState({'open': true})}}>
+                <TouchableOpacity onPress={() => {
+                    this.state.canModify ?
+                        this.setState({'open': true})
+                        :
+                        null
+                    }}>
                     <Text style={{color:'white', fontSize: 17, textAlign:'right'}}>{expDate.toString()}</Text>
                 </TouchableOpacity>
                 
                 <DatePicker
                     modal
-                    open= { this.state.open }
-                    date= { new Date(this.state.bill.expirationDate.toDate()) }
-                    mode= "date" 
-                    onConfirm= {
+                    open = { this.state.open }
+                    date = { new Date(this.state.bill.expirationDate.toDate()) }
+                    mode = "date" 
+                    onConfirm = {
                         (date) => {
                             this._onChangeExpirationDate(date, false)
                         }
                     }
-                    onCancel= {
+                    onCancel = {
                         () => {
                             this.setState({'open': false})
                         }
@@ -109,9 +161,10 @@ export default class BillDetails extends React.Component {
     }
 
     render() {
-        const { bill, billID } = this.props.route.params;
+        const { bill, billID, isNewBill } = this.props.route.params;
         this.state.bill = bill
         this.state.billID = billID
+        this.state.isNewBill = isNewBill
 
         return(
             <SafeAreaView style={{flex:1, backgroundColor: colors.darkBackground, justifyContent:'center', alignItems:'center'}}>
@@ -121,8 +174,34 @@ export default class BillDetails extends React.Component {
                  start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{flex:5, width:'100%'}}>
                     <ScrollView style={{width: '100%', height:'100%'}} contentContainerStyle={{alignItems:'center', flexDirection:'column'}}>
 
+                        {!this.state.bill.paid && !this.state.isNewBill ?
+                            <View style={{width:'100%', justifyContent:'center', alignItems:'center', flexDirection:'row', padding:20}}>
+                                <TouchableOpacity style={{width:'30%'}} onPress={() => {this.setState({canModify: false})}}>
+                                        <LinearGradient colors={[colors.darkButton, colors.lightButton]} 
+                                        start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} 
+                                        style={{width:'100%', justifyContent:'center', alignItems:'center', borderTopLeftRadius: 10,
+                                        borderBottomLeftRadius: 10, padding:5, opacity: this.state.canModify ? 1 : 0.5}}>
+
+                                            <Text style={{color:'white', fontSize: 18}}>Visualizza</Text>
+                                        </LinearGradient>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={{width:'30%'}} onPress={() => {this.setState({canModify: true})}}>
+                                        <LinearGradient colors={[colors.darkButton, colors.lightButton]} 
+                                        start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} 
+                                        style={{width:'100%', justifyContent:'center', alignItems:'center', borderTopRightRadius: 10,
+                                        borderBottomRightRadius: 10, padding:5, opacity: this.state.canModify ? 0.5 : 1}}>
+
+                                            <Text style={{color:'white', fontSize: 18}}>Modifica</Text>
+                                        </LinearGradient>
+                                </TouchableOpacity>
+                            </View>
+                            :
+                            null
+                        }
+                        
+
                         <View style={{flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: colors.darkBackground,
-                            justifyContent:'space-between', alignItems:'center', width:'90%', paddingBottom: 5}}>
+                            justifyContent:'space-between', alignItems:'center', width:'90%', paddingBottom: 5, paddingTop: 5}}>
                             <View style={{flex:2}}>
                                 <Text style={{color:'white', fontSize: 18}}>Nome azienda:</Text>
                             </View>
@@ -130,7 +209,8 @@ export default class BillDetails extends React.Component {
                                 <TextInput style={{fontSize: 18, backgroundColor:'trasparent', flex:4, color: 'white', textAlign:'right'}}
                                     underlineColorAndroid="transparent"
                                     value={this.state.bill.companyName}
-                                    onChangeText={text => {this._onChangeCompanyName(text)}}/>
+                                    onChangeText={text => {this._onChangeCompanyName(text)}}
+                                    editable={this.state.canModify ? true : false}/>
                             </View>
                         </View>
 
@@ -144,7 +224,8 @@ export default class BillDetails extends React.Component {
                                     underlineColorAndroid="transparent"
                                     value={this.state.bill.totalAmount}
                                     onChangeText={text => {this._onChangeTotalAmount(text)}}
-                                    keyboardType="numeric"/>
+                                    keyboardType="numeric"
+                                    editable={this.state.canModify ? true : false}/>
                                 <Text style={{color: colors.lightBlue, fontSize: 18, flex:1}}> €</Text>
                             </View>
                         </View>
@@ -167,7 +248,7 @@ export default class BillDetails extends React.Component {
                             <View style={{flex:3, flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}>
                                 <Picker selectedValue={this.state.bill.category} style={{ width:'100%', color: 'white'}} 
                                     onValueChange={(itemValue, itemIndex) => this._onChangeCategory(itemValue)} dropdownIconColor={'white'}
-                                    placeholder={'Seleziona categoria'} placeholderStyle={{ color: '#bfc6ea' }}>
+                                    placeholder={'Seleziona categoria'} placeholderStyle={{ color: '#bfc6ea' }} enabled={this.state.canModify ? true : false}>
                                         {
                                             mockData.categoryForSelector.map(cat => {
                                                 return (
@@ -187,7 +268,7 @@ export default class BillDetails extends React.Component {
                             <View style={{flex:3, flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}>
                                 <Picker selectedValue={this.state.bill.recurrence} style={{ width:'100%', color: 'white'}} 
                                     onValueChange={(itemValue, itemIndex) => this._onChangeRecurrence(itemValue)} dropdownIconColor={'white'}
-                                    placeholder={'Seleziona ricorrenza'} placeholderStyle={{ color: '#bfc6ea' }}>
+                                    placeholder={'Seleziona ricorrenza'} placeholderStyle={{ color: '#bfc6ea' }} enabled={this.state.canModify ? true : false}>
                                         {
                                             mockData.repeatEvery.map(cat => {
                                                 return (
@@ -211,43 +292,15 @@ export default class BillDetails extends React.Component {
                                     underlineColorAndroid="transparent"
                                     multiline={true}
                                     value={this.state.bill.note}
-                                    onChangeText={text => {this._onChangeNote(text)}}/>
+                                    onChangeText={text => {this._onChangeNote(text)}}
+                                    editable={this.state.canModify ? true : false}/>
                             </View>
                         </View>
 
-                        <TouchableOpacity style={{margin: 15, width: '75%', borderRadius: 5, paddingTop: 20}}
-                            onPress={this._updateFirebase}>
-                            <LinearGradient colors={[colors.darkButton, colors.lightButton]} 
-                            start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} 
-                            style={{width:'100%', justifyContent:'center', alignItems:'center', borderRadius: 10, padding: 15}}>
-                                <Text style={{fontSize: 17, color:'white'}}>
-                                    Salva modifiche
-                                </Text>
-                            </LinearGradient>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity style={{margin: 15, width: '75%', borderRadius: 5}}
-                            onPress={() => {}}>
-                            <LinearGradient colors={[colors.darkButton, colors.lightButton]} 
-                            start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} 
-                            style={{width:'100%', justifyContent:'center', alignItems:'center', borderRadius: 10, padding: 15}}>
-                                <Text style={{fontSize: 17, color:'white'}}>
-                                    Contrassegna come pagata
-                                </Text>
-                            </LinearGradient>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity style={{margin: 15, width: '75%', borderRadius: 5}}
-                            onPress={() => {}}>
-                            <LinearGradient colors={[colors.darkButton, colors.lightButton]} 
-                            start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} 
-                            style={{width:'100%', justifyContent:'center', alignItems:'center', borderRadius: 10, padding: 15}}>
-                                <Text style={{fontSize: 17, color:'white'}}>
-                                    Elimina
-                                </Text>
-                            </LinearGradient>
-                        </TouchableOpacity>
-
+                        <BillDetailsButtons bill={this.state.bill} canModify={this.state.canModify} isNewBill={this.state.isNewBill}
+                            updateFirebase={this._updateFirebase} setPaidBill={this._setPaidBill} deleteBill={this._deleteBill}
+                            insertFirebase={this._insertFirebase}/>
+                            
                     </ScrollView>
                  </LinearGradient>
             </SafeAreaView>
