@@ -108,7 +108,7 @@ export default class BillsRecap extends React.Component {
         return (
             <SafeAreaView style={{flex:1, backgroundColor: colors.darkBackground, justifyContent:'center', alignItems:'center'}}>
                 <StatusBar backgroundColor={colors.darkBackground} barStyle="light-content" style={styles.statusBarStyle}/>
-                <Header hideLeftIcon={true} hideRightIcon={true} pageName={'Bills Recap'}/>
+                <Header hideLeftIcon={true} hideRightIcon={true} pageName={'Lista Bollette'}/>
                 <LinearGradient colors={[colors.mediumBackground, colors.lightBackground]} 
                  start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{flex:5, width:'100%', justifyContent:'center', alignItems:'center', flexDirection:'column'}}>
 
@@ -136,7 +136,7 @@ export default class BillsRecap extends React.Component {
                     </View>
 
                     <View style={{position:'absolute', bottom: 30, right: 30}}>
-                        <TouchableOpacity style={{borderRadius: 100/2}} onPress={() => this._onPressBillsCard({}, null, true)}>
+                        <TouchableOpacity style={{borderRadius: 100/2, opacity:.6}} onPress={() => this._onPressBillsCard({}, null, true)}>
                             <LinearGradient colors={[colors.darkButton, colors.lightButton]} 
                              start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} 
                              style={{width:'100%', justifyContent:'center', alignItems:'center', padding: 15, borderRadius: 100/2}}>

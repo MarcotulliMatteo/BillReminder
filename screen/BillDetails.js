@@ -78,6 +78,7 @@ export default class BillDetails extends React.Component {
         .doc(this.state.billID)
         .update(this.state.bill)
         .then(() => {
+            this._navBack()
             ToastAndroid.show("Modulo Aggiornato", ToastAndroid.LONG);
             console.log('Bill updated!');
         }).catch(err => {
@@ -93,6 +94,7 @@ export default class BillDetails extends React.Component {
             paid: true
         })
         .then(() => {
+            this._navBack()
             ToastAndroid.show("Modulo Pagato", ToastAndroid.LONG);
             console.log('Bill Paid!');
         }).catch(err => {
@@ -106,6 +108,7 @@ export default class BillDetails extends React.Component {
         .doc(this.state.billID)
         .delete()
         .then(() => {
+            this._navBack()
             ToastAndroid.show("Modulo Cancellato", ToastAndroid.LONG);
             console.log('Bill deleted!');
         }).catch(err => {
@@ -118,6 +121,7 @@ export default class BillDetails extends React.Component {
         .collection('Bills')
         .add(bill)
         .then(() => {
+            this._navBack()
             ToastAndroid.show("Modulo Creato", ToastAndroid.LONG);
             console.log('Bill added!');
         }).catch(err => {
@@ -169,7 +173,7 @@ export default class BillDetails extends React.Component {
         return(
             <SafeAreaView style={{flex:1, backgroundColor: colors.darkBackground, justifyContent:'center', alignItems:'center'}}>
                 <StatusBar backgroundColor={colors.darkBackground} barStyle="light-content" style={styles.statusBarStyle}/>
-                <Header hideLeftIcon={false} hideRightIcon={true} pageName={'Bill Details'} navBack={this._navBack}/>
+                <Header hideLeftIcon={false} hideRightIcon={true} pageName={'Dettaglio Bolletta'} navBack={this._navBack}/>
                 <LinearGradient colors={[colors.mediumBackground, colors.lightBackground]} 
                  start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{flex:5, width:'100%'}}>
                     <ScrollView style={{width: '100%', height:'100%'}} contentContainerStyle={{alignItems:'center', flexDirection:'column'}}>

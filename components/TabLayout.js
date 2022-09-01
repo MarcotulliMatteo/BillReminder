@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Dimensions } from 'react-native';
+import { SafeAreaView, TouchableOpacity, View, Text, ScrollView } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+
+import BillCards from './BillCard';
 
 import colors from "../utils/colors.json";
 import TabBills from './TabBills';
@@ -17,37 +19,29 @@ const TabLayout = props => {
         props.refreshData(routes[index])
     }, [index])
 
-    const FirstRouteUnpaid = () => (
-        <TabBills category={props.category} bills={props.bills} showBusy={props.showBusy} paid={false} onPress={props.onPress}/>
-    );
-      
-    const SecondRoutePaid = () => (
-        <TabBills category={props.category} bills={props.bills} showBusy={props.showBusy} paid={true} onPress={props.onPress}/>
-    );
-
-    const renderScene = SceneMap({
-        unpaid: FirstRouteUnpaid,
-        paid: SecondRoutePaid,
-    });
-
-    const initialLayout = { width: Dimensions.get('window').width};
-
-    const renderTabBar = props => (
-        <TabBar
-          {...props}
-          indicatorStyle={{ backgroundColor: colors.lightButton}}
-          style={{ backgroundColor: 'transparent' }}
-        />
-    );
-
     return (
-        <TabView
-            renderTabBar={renderTabBar}
-            navigationState={{ index, routes }}
-            renderScene={renderScene}
-            onIndexChange={setIndex}
-            initialLayout={initialLayout}
-        />
+       <SafeAreaView style={{width:'100%', height:'100%'}}>
+            <View style={{flexDirection:'row', width:'100%'}}>
+                <TouchableOpacity style={{flex:1, padding: 15, borderBottomColor: colors.lightButton,
+                     justifyContent:'center', alignItems: 'center', borderBottomWidth: index == 0 ? 2 : 0}}
+                     onPress={() => {setIndex(0)}}>
+                    <Text style={{fontSize: 18, color:'white'}}>Da Pagare</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={{flex:1, padding: 15, borderBottomColor: colors.lightButton,
+                     justifyContent:'center', alignItems: 'center', borderBottomWidth: index == 1 ? 2 : 0}}
+                     onPress={() => {setIndex(1)}}>
+                    <Text style={{fontSize: 18, color:'white'}}>Pagate</Text>
+                </TouchableOpacity>
+            </View>
+
+            <View style={{width: '100%'}}>
+                {index == 0 ?
+                    <TabBills category={props.category} bills={props.bills} showBusy={props.showBusy} paid={false} onPress={props.onPress}/>
+                    :
+                    <TabBills category={props.category} bills={props.bills} showBusy={props.showBusy} paid={true} onPress={props.onPress}/>
+                }
+            </View>
+       </SafeAreaView>
     )
 }
 
