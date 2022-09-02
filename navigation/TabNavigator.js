@@ -5,7 +5,7 @@ import EntypoIcons from "react-native-vector-icons/Entypo";
 
 import colors from "../utils/colors.json";
 
-import HomeScreen from '../screen/Home';
+import StatisticScreen from '../screen/Statistic';
 import BillsRecapStack from './BillsRecapStack';
 
 const Tab = createBottomTabNavigator();
@@ -19,14 +19,14 @@ const TabNavigator = () => {
             tabBarInactiveTintColor: colors.darkButton,
             tabBarActiveTintColor: colors.lightButton
         }}>
-            <Tab.Screen name='Home' component={HomeScreen} options={{
+            <Tab.Screen name='Home' component={BillsRecapStack} options={{
                 tabBarIcon: ({color, size}) => {
                     return(
                         <Ionicons name="home-outline" color={color} size={size}/>
                     )
                 }
             }}/>
-            <Tab.Screen name='BillsRecap' component={BillsRecapStack} options={{
+            <Tab.Screen name='BillsRecap' component={StatisticScreen} options={{
                 tabBarIcon: ({color, size}) => {
                     return(
                         <EntypoIcons name="documents" color={color} size={size}/>

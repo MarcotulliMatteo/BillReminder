@@ -15,6 +15,23 @@
     "repeatEvery": [
         "Mai",
         "Settimana",
-        "Mese"
-    ]
+        "Mese",
+        "Bimestre"
+    ],
+    "categoryColor": {
+        "Casa": "#FD8CB2",
+        "Veicoli": "#F7C2AC",
+        "Abbonamenti": "#B76FB3",
+        "Altro": "#A34AAA",
+        "paid": "#FD8CB2",
+        "unpaid": "#F7C2AC"
+    },
+    "categoryColorBlue": {
+        "Casa": "#B2FFFF",
+        "Veicoli": "#E6FFFF",
+        "Abbonamenti": "#CCFFFF",
+        "Altro": "#80CCCC",
+        "paid": "#B2FFFF",
+        "unpaid": "#E6FFFF"
+    }
 }

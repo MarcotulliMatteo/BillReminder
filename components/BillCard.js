@@ -16,7 +16,7 @@ const BillCards = props => {
                                 <Text style={{fontSize: 18, color:'white'}}>{props.companyName}</Text>
                             </View>
                             <View style={{paddingTop: 3}}>
-                                <Text style={{fontSize: 14, color:'white'}}>{props.expirationDate}</Text>
+                                <Text style={{fontSize: 14, color: props.isExpired ? 'red' : 'white'}}>{props.expirationDate}</Text>
                             </View>
                         </View>
                         <View style={{fontSize: 18, color:'white'}}>

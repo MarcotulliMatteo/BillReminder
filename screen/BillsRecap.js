@@ -53,6 +53,7 @@ export default class BillsRecap extends React.Component {
             .collection('Bills')
             .where('userID', '==', userID)
             .where('paid', '==', paid)
+            .orderBy('expirationDate')
             .get()
             .then(querySnapshot => {
                 const data = querySnapshot._docs
@@ -68,6 +69,7 @@ export default class BillsRecap extends React.Component {
             .where('userID', '==', userID)
             .where('paid', '==', paid)
             .where('category', '==', category)
+            .orderBy('expirationDate')
             .get()
             .then(querySnapshot => {
                 const data = querySnapshot._docs
