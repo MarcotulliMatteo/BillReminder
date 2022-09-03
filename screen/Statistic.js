@@ -10,6 +10,7 @@ import Header  from "../components/Header";
 import PieChartCardCategory from "../components/charts/PieChartCardCategory";
 import PieChartCardPaid from "../components/charts/PieChartCardPaid";
 import PieChartCardPaidAmount from "../components/charts/PieChartCardPaidAmount";
+import PieChartCardExpired from "../components/charts/PieChartCardExpired";
 
 import colors from "../utils/colors.json";
 
@@ -73,9 +74,16 @@ export default class Home extends React.Component  {
                         <PieChartCardCategory data={this.state.bills} showPieChartBusy={this.state.showPieChartBusy}/>
 
                         <View style={{flexDirection:'row', justifyContent:'space-between', padding: 15, justifyContent:'center'}}>
-                            <Text style={{color:'white', fontSize: 18}}>Stato</Text>
+                            <Text style={{color:'white', fontSize: 18}}>Stato Pagamenti</Text>
                         </View>
                         <PieChartCardPaid data={this.state.bills} showPieChartBusy={this.state.showPieChartBusy}/>
+
+                        <View style={{flexDirection:'row', justifyContent:'space-between', padding: 15, justifyContent:'center'}}>
+                            <Text style={{color:'white', fontSize: 18}}>Stato Scadenze</Text>
+                        </View>
+                        <PieChartCardExpired data={this.state.bills} showPieChartBusy={this.state.showPieChartBusy}/>
+
+                        <View style={{paddingBottom: 40}}/>
                     </ScrollView>
                       
                 </LinearGradient>

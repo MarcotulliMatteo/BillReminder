@@ -24,7 +24,9 @@
         "Abbonamenti": "#B76FB3",
         "Altro": "#A34AAA",
         "paid": "#FD8CB2",
-        "unpaid": "#F7C2AC"
+        "unpaid": "#F7C2AC",
+        "expired": "#F7C2AC",
+        "unexpired": "#FD8CB2"
     },
     "categoryColorBlue": {
         "Casa": "#B2FFFF",
