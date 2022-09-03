@@ -5,6 +5,7 @@ import { getStatusBarHeight } from 'react-native-status-bar-height';
 import LinearGradient from 'react-native-linear-gradient';
 import DatePicker from 'react-native-date-picker';
 import { Picker } from '@react-native-picker/picker';
+import moment from 'moment/min/moment-with-locales';
 
 import Header  from "../components/Header";
 import BillDetailsButtons from "../components/BillDetailsButtons";
@@ -130,8 +131,9 @@ export default class BillDetails extends React.Component {
     }
 
     _formatDateToRender = () => {
-        const optionsDate = { year: 'numeric', month: 'long', day: 'numeric' };
-        const expDate = new Date(this.state.bill.expirationDate.toDate()).toLocaleDateString("it-IT", optionsDate);
+        const date = new Date(this.state.bill.expirationDate.toDate());
+        moment.locale('it');
+        const expDate = moment(date).format('D MMMM YYYY');
 
         return (
             <View>
@@ -141,7 +143,7 @@ export default class BillDetails extends React.Component {
                         :
                         null
                     }}>
-                    <Text style={{color:'white', fontSize: 17, textAlign:'right'}}>{expDate.toString()}</Text>
+                    <Text style={{color:'white', fontSize: 17, textAlign:'right'}}>{expDate}</Text>
                 </TouchableOpacity>
                 
                 <DatePicker
