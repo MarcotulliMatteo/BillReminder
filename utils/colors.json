@@ -6,5 +6,6 @@
     "lightButton": "#F7C2AC",
     "lightCard": "#B76FB3",
     "darkCard": "#A34AAA",
-    "lightBlue": "#01C8CB"
+    "lightBlue": "#01C8CB",
+    "expiredRed": "#F0482E"
 }

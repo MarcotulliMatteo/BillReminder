@@ -69,7 +69,7 @@ export default class Home extends React.Component  {
                         <PieChartCardPaidAmount data={this.state.bills} showPieChartBusy={this.state.showPieChartBusy}/>
                         
                         <View style={{flexDirection:'row', justifyContent:'space-between', padding: 15, justifyContent:'center'}}>
-                            <Text style={{color:'white', fontSize: 18}}>Categoria</Text>
+                            <Text style={{color:'white', fontSize: 18}}>Categorie</Text>
                         </View>
                         <PieChartCardCategory data={this.state.bills} showPieChartBusy={this.state.showPieChartBusy}/>
 
