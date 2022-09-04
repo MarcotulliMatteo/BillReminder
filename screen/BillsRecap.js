@@ -110,7 +110,7 @@ export default class BillsRecap extends React.Component {
         return (
             <SafeAreaView style={{flex:1, backgroundColor: colors.darkBackground, justifyContent:'center', alignItems:'center'}}>
                 <StatusBar backgroundColor={colors.darkBackground} barStyle="light-content" style={styles.statusBarStyle}/>
-                <Header hideLeftIcon={true} hideRightIcon={true} pageName={'Lista Bollette'}/>
+                <Header hideLeftIcon={true} hideRightIcon={true} pageName={'Utenze'}/>
                 <LinearGradient colors={[colors.mediumBackground, colors.lightBackground]} 
                  start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{flex:5, width:'100%', justifyContent:'center', alignItems:'center', flexDirection:'column'}}>
 

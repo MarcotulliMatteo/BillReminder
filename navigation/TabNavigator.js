@@ -1,12 +1,13 @@
 import React from 'react';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import EntypoIcons from "react-native-vector-icons/Entypo";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 import colors from "../utils/colors.json";
 
 import StatisticScreen from '../screen/Statistic';
 import BillsRecapStack from './BillsRecapStack';
+import SettingsStack from './SettingsStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -29,7 +30,14 @@ const TabNavigator = () => {
             <Tab.Screen name='BillsRecap' component={StatisticScreen} options={{
                 tabBarIcon: ({color, size}) => {
                     return(
-                        <EntypoIcons name="documents" color={color} size={size}/>
+                        <MaterialCommunityIcons name="chart-line" color={color} size={size}/>
+                    )
+                }
+            }}/>
+            <Tab.Screen name='SettingsStack' component={SettingsStack} options={{
+                tabBarIcon: ({color, size}) => {
+                    return(
+                        <Ionicons name="settings-outline" color={color} size={size}/>
                     )
                 }
             }}/>

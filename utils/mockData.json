@@ -35,5 +35,9 @@
         "Altro": "#80CCCC",
         "paid": "#B2FFFF",
         "unpaid": "#E6FFFF"
-    }
+    },
+    "languages": [
+        "Italiano",
+        "English"
+    ]
 }

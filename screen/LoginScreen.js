@@ -4,8 +4,6 @@ import auth from '@react-native-firebase/auth';
 import LinearGradient from 'react-native-linear-gradient';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
 
-import Ionicon from 'react-native-vector-icons/Ionicons';
-
 import colors from '../utils/colors.json'
 
 import { useDispatch } from "react-redux";
