@@ -32,7 +32,8 @@ const TabNavigator = () => {
                     return(
                         <MaterialCommunityIcons name="chart-line" color={color} size={size}/>
                     )
-                }
+                },
+                unmountOnBlur: true
             }}/>
             <Tab.Screen name='SettingsStack' component={SettingsStack} options={{
                 tabBarIcon: ({color, size}) => {

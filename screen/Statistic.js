@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, StatusBar, Text, ScrollView} from "react-native";
+import { StyleSheet, View, StatusBar, Text, ScrollView, ActivityIndicator} from "react-native";
 import SafeAreaView from 'react-native-safe-area-view';
 import LinearGradient from 'react-native-linear-gradient';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
@@ -22,7 +22,7 @@ export default class Home extends React.Component  {
 
     state = {
         bills: [],
-        showPieChartBusy: false
+        showBusy: true
     }
 
     componentDidMount = () => {
@@ -62,30 +62,41 @@ export default class Home extends React.Component  {
                 <LinearGradient colors={[colors.mediumBackground, colors.lightBackground]} 
                     start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{width:'100%', height: '100%'}}>
                     
-                    <ScrollView>
-                        <View style={{flexDirection:'row', justifyContent:'space-between', padding: 15, justifyContent:'center'}}>
-                            <Text style={{color:'white', fontSize: 18}}>Saldo</Text>
-                        </View>
-                        <PieChartCardPaidAmount data={this.state.bills} showPieChartBusy={this.state.showPieChartBusy}/>
-                        
-                        <View style={{flexDirection:'row', justifyContent:'space-between', padding: 15, justifyContent:'center'}}>
-                            <Text style={{color:'white', fontSize: 18}}>Categorie</Text>
-                        </View>
-                        <PieChartCardCategory data={this.state.bills} showPieChartBusy={this.state.showPieChartBusy}/>
+                    {
+                        this.state.showBusy ? 
+                            <View>
+                                <ActivityIndicator size={50} color={colors.lightBlue} style={{padding:15}}/> 
+                            </View>
+                        : this.state.bills.length ?
+                            <ScrollView>
+                                <View style={{flexDirection:'row', justifyContent:'space-between', padding: 15, justifyContent:'center'}}>
+                                    <Text style={{color:'white', fontSize: 18}}>Saldo</Text>
+                                </View>
+                                <PieChartCardPaidAmount data={this.state.bills} showPieChartBusy={this.state.showBusy}/>
 
-                        <View style={{flexDirection:'row', justifyContent:'space-between', padding: 15, justifyContent:'center'}}>
-                            <Text style={{color:'white', fontSize: 18}}>Stato Pagamenti</Text>
-                        </View>
-                        <PieChartCardPaid data={this.state.bills} showPieChartBusy={this.state.showPieChartBusy}/>
+                                <View style={{flexDirection:'row', justifyContent:'space-between', padding: 15, justifyContent:'center'}}>
+                                    <Text style={{color:'white', fontSize: 18}}>Categorie</Text>
+                                </View>
+                                <PieChartCardCategory data={this.state.bills} showPieChartBusy={this.state.showBusy}/>
 
-                        <View style={{flexDirection:'row', justifyContent:'space-between', padding: 15, justifyContent:'center'}}>
-                            <Text style={{color:'white', fontSize: 18}}>Stato Scadenze</Text>
-                        </View>
-                        <PieChartCardExpired data={this.state.bills} showPieChartBusy={this.state.showPieChartBusy}/>
+                                <View style={{flexDirection:'row', justifyContent:'space-between', padding: 15, justifyContent:'center'}}>
+                                    <Text style={{color:'white', fontSize: 18}}>Stato Pagamenti</Text>
+                                </View>
+                                <PieChartCardPaid data={this.state.bills} showPieChartBusy={this.state.showBusy}/>
 
-                        <View style={{paddingBottom: 40}}/>
-                    </ScrollView>
-                      
+                                <View style={{flexDirection:'row', justifyContent:'space-between', padding: 15, justifyContent:'center'}}>
+                                    <Text style={{color:'white', fontSize: 18}}>Stato Scadenze</Text>
+                                </View>
+                                <PieChartCardExpired data={this.state.bills} showPieChartBusy={this.state.showBusy}/>
+
+                                <View style={{paddingBottom: 40}}/> 
+                            </ScrollView>
+                            :
+                            <View style={{justifyContent:'center', padding: 15, alignItems:'center'}}>
+                                <Text style={{color:'white', fontSize: 16}}>Non ci sono informazioni disponibili al momento</Text>
+                            </View>
+                        }
+                    
                 </LinearGradient>
             </SafeAreaView>
         )

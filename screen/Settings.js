@@ -42,7 +42,8 @@ const SettingsScreen = ({ navigation: { navigate } }) => {
             <Header hideLeftIcon={true} hideRightIcon={true} pageName={'Impostazioni'}/>
             <LinearGradient colors={[colors.mediumBackground, colors.lightBackground]} 
                 start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{height:'100%', width:'100%', flexDirection:'column', alignItems:'center'}}>
-
+                
+                {/*
                 <View style={{flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: colors.darkBackground,
                     justifyContent:'space-between', alignItems:'center', width:'90%', paddingBottom: 15, paddingTop: 15, justifyContent:'center', alignItems:'center'}}>
                     <View style={{flex:2}}>
@@ -62,6 +63,7 @@ const SettingsScreen = ({ navigation: { navigate } }) => {
                         </Picker>
                     </View>
                 </View>
+                */}
 
                 <View style={{flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: colors.darkBackground,
                     justifyContent:'space-between', alignItems:'center', width:'90%', paddingBottom: 15, paddingTop: 15, justifyContent:'center', alignItems:'center'}}>

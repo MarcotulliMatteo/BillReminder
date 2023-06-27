@@ -24,11 +24,11 @@ export default class Information extends React.Component  {
                     start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={{height:'100%', width:'100%', flexDirection:'column', alignItems:'center'}}>
                         <View style={{width:'100%', height:'100%', padding:20}}>
                             <Text style={{fontSize: 18, color: 'white'}}>
-                                Questa applicazione è stata sviluppata da The Celtic Mobile Developer tramite l'utilizzo del freamwork React Native e la piattaforma Firebase.
+                                Questa applicazione è stata sviluppata da Matteo Marcotulli tramite l'utilizzo del freamwork React Native e la piattaforma Firebase.
                                 {"\n\n"}
                                 Questa applicazione ha lo scopo di supportare l'utente nella schedulazione del piano di pagamento delle utenze.
                                 {"\n\n"}
-                                Per qualunque richiesta è possibile contattare gli sviluppatori tramite l'email thecelticmobiledeveloper@gmail.com.
+                                Per qualunque richiesta è possibile contattare gli sviluppatori tramite l'email marcotullimatteo5b@gmail.com.
                             </Text>
                         </View>
                 </LinearGradient>

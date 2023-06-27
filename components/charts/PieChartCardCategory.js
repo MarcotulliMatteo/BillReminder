@@ -30,7 +30,7 @@ const PieChartCardCategory = props => {
             })
     
             mockData.categoryForSelector.forEach(elem => {
-                dataNumberToRender.push(categoryBillCount[elem])
+                dataNumberToRender.push(categoryBillCount[elem] ?? 0)
                 dataColorToRender.push(mockData.categoryColor[elem])
             })    
         }
